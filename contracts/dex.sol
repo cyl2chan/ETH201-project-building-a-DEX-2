@@ -8,7 +8,7 @@ import "./wallet.sol";
 //limit order is always added into orderbook
 
 contract Dex is Wallet {
-
+    //one order book for BUY , one for SELL
     enum Side {
         BUY,
         SELL
@@ -23,7 +23,8 @@ contract Dex is Wallet {
         uint price;
     }
 
-    mapping(bytes32 => mapping(uint => Order[])) public orderBook;  //bytes32 is the asset
+    // order book hv bid n ask //1 orderbook for each asset
+    mapping(bytes32 => mapping(uint => Order[])) public orderBook;  //bytes32 is the asset //Order[] is a list of orders
 
     function getOrderBook(bytes32 ticker, Side side) view public returns(Order[] memory) {
         return orderBook[ticker][uint(side)];
